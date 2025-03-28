@@ -1,1 +1,9 @@
-from .core import EyEar  # أو اسم الكلاس الصحيح
+from .core import EyEar  
+
+
+
+
+
+#___________________#
+# import out library
+!pip install opencv-python
