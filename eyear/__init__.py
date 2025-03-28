@@ -5,8 +5,6 @@ from .core import EyEar
 #___________________#
 print("import library")
 run_example_usage = 0 # Change this to 0/1 to disable/enable the example usage
-
-
 # Basic Imports
 import os
 import time
