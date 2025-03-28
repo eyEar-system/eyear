@@ -1,11 +1,9 @@
 from .core import EyEar  
 
 
-print(0)
-
 
 #___________________#
-print(1)
+print("import library")
 run_example_usage = 0 # Change this to 0/1 to disable/enable the example usage
 # Basic Imports
 import os
@@ -102,3 +100,4 @@ import subprocess
 import sys
 import time  # Optional: for adding a delay
 import re
+print("finish library")
