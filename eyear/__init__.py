@@ -1,1 +1,1 @@
-from .core import Greeter
+from .core import EyEar  # أو اسم الكلاس الصحيح
