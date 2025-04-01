@@ -1,9 +1,9 @@
 
 from .core import EyEar  
 from .firebase import FirebaseStorageManager 
-from .firebase import FirebaseConfig 
+from .firebase import FirebaseRealtimeManager 
 
-print("finish library # 1")
+print("import finish")
 
 
 

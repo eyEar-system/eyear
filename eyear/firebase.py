@@ -21,10 +21,10 @@ class FirebaseStorageManager:
         """Initialize Firebase if not already initialized."""
         if not firebase_admin._apps:
             # تغيير اسم المتغير هنا لتجنب التعارض
-            firebase_cred = firebase_credentials.Certificate(json.loads(self.service_account_json))
+            # Use credentials.Certificate instead of firebase_credentials.Certificate
+            firebase_cred = credentials.Certificate(json.loads(self.service_account_json)) 
             firebase_admin.initialize_app(firebase_cred, {'storageBucket': self.bucket_name})
         self.bucket = storage.bucket()
-
     def generate_access_token(self):
         """Generate an access token for the service account."""
         try:
@@ -64,20 +64,20 @@ if __name__ == "__main__":
 
     # Initialize the Firebase Storage manager
     storage_manager = FirebaseStorageManager(json_content, "eyear-87a0e.appspot.com")
-
-    # Upload a file and generate a signed URL
-    signed_url = storage_manager.upload_file("/content/force_data3.bin", "bin/2force_data.bin")
-    if signed_url:
-        print(f"Generated Signed URL: {signed_url}")
-
+ 
     # Download a file from Firebase
-    local_path = storage_manager.download_file("test_voice/latest.wav", "/content/downloaded_file.wav")
+    local_path = storage_manager.download_file("audio/tone.wav", "/content/downloaded_file.wav")
     if local_path:
         print(f"File downloaded to: {local_path}")
 
+    # Upload a file and generate a signed URL
+    signed_url = storage_manager.upload_file("/content/downloaded_file.wav", "audio/tone.wav")
+    if signed_url:
+        print(f"Generated Signed URL: {signed_url}")
 
 
-class FirebaseConfig:
+
+class FirebaseRealtimeManager:
     # Firebase configuration as a class variable
     config = {
         'apiKey': "AIzaSyCBvKO1K2FJ_MoPXAckuga40mwG593Qo7o",
@@ -106,8 +106,16 @@ class FirebaseConfig:
         """Return the Firebase Realtime Database object"""
         return self.db
 
-# Example of how to use the class
 if __name__ == "__main__":
-    firebase_config = FirebaseConfig()  # Initialize the class and Firebase
-    db_instance = firebase_config.get_db()  # Get the Realtime Database instance
-    print("Database instance retrieved.")
+    # Initialize Firebase Realtime Database
+    firebase_config = FirebaseRealtimeManager()
+    db = firebase_config.get_db()
+    print("Database connected.")
+
+    # Add data
+    db.child("test").set({"LED": True})
+    print("LED flag is True.")
+
+    # Get data
+    led = db.child("test/LED").get()
+    print("led flag condition :", led.val())
