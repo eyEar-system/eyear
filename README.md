@@ -12,20 +12,14 @@ A simple Python package for eyEar functionalities.
 !pip install pyrebase4
 ```
 
-## Firebase_Storage_Manager
+## FirebaseStorageManager
 
 ### Initialize storage
 ```python
     # Initialize the Firebase Storage manager
     storage_manager = FirebaseStorageManager(json_content, "eyear-87a0e.appspot.com")
 ```
-### upload
-```python
-    # Upload a file and generate a signed URL
-    signed_url = storage_manager.upload_file("/content/force_data3.bin", "bin/2force_data.bin")
-    if signed_url:
-        print(f"Generated Signed URL: {signed_url}")
-```
+
 ### downoad
 ```python
     # Download a file from Firebase
@@ -34,7 +28,16 @@ A simple Python package for eyEar functionalities.
         print(f"File downloaded to: {local_path}")
 ```
 
-### Initialize data base
+### upload
+```python
+    # Upload a file and generate a signed URL
+    signed_url = storage_manager.upload_file("content/downloaded_file.wav", "test_voice/latest.wav")
+    if signed_url:
+        print(f"Generated Signed URL: {signed_url}")
+```
+
+
+## FirebaseRealtimeManager
 ```python 
     # Initialize Firebase Realtime Database
     firebase_config = FirebaseRealtimeManager()
