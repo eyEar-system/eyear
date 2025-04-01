@@ -1,4 +1,4 @@
-# eyEar Library
+# eyEar Library 2
 
 A simple Python package for eyEar functionalities.
 
