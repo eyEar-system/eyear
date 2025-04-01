@@ -5,31 +5,19 @@
 import pyrebase
 import firebase_admin
 from firebase_admin import credentials, db
-
 from firebase_admin import credentials as firebase_credentials, storage
 from google.auth.transport.requests import Request
 from google.oauth2.service_account import Credentials
 import json
 from datetime import timedelta
 
-# Firebase configuration
-config = {
-  'apiKey': "AIzaSyCBvKO1K2FJ_MoPXAckuga40mwG593Qo7o",
-  'authDomain': "eyear-87a0e.firebaseapp.com",
-  'databaseURL': "https://eyear-87a0e-default-rtdb.firebaseio.com",
-  'projectId': "eyear-87a0e",
-  'storageBucket': "eyear-87a0e.appspot.com",
-  'messagingSenderId': "337767300301",
-  'appId': "1:337767300301:web:050cb7adf9c7d0e3b8bd84",
-  'measurementId': "G-8SRQ7WFTPK"
-}
+
 
 # Initialize Firebase
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()  # Using Realtime Database
 
 print("Firebase initialized successfully.")
-
 
 class FirebaseStorageManager:
     def __init__(self, service_account_json, bucket_name):
