@@ -1,7 +1,7 @@
 
 from .core import EyEar  
 from .firebase import FirebaseStorageManager 
-from .firebase2 import FirebaseConfig 
+from .firebase import FirebaseConfig 
 
 print("finish library")
 
