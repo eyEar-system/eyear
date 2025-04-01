@@ -2,10 +2,14 @@
 
 A simple Python package for eyEar functionalities.
 
-## Installation
+## Installation requirement 
 
 ```python
 !pip install git+https://github.com/eyEar-system/eyear.git
+```
+```python
+#for firebase
+!pip install pyrebase4
 ```
 
 ## Firebase_Storage_Manager
