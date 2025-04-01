@@ -44,3 +44,9 @@ config = {
   'measurementId': "G-8SRQ7WFTPK"
 }
 print("config content as a string done.")
+# Initialize Firebase
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()  # Using Realtime Database
+
+print("Firebase initialized successfully.")
+
