@@ -1,6 +1,6 @@
 
 from .core import EyEar  
-from .firebase import FirebaseStorageManager
+from .firebase import FirebaseStorageManager , FirebaseConfig
 print("finish library")
 
 
@@ -31,23 +31,4 @@ json_content = """
 """
 
 print("JSON content as a string done.")
-
-
-# Firebase configuration
-config = {
-  'apiKey': "AIzaSyCBvKO1K2FJ_MoPXAckuga40mwG593Qo7o",
-  'authDomain': "eyear-87a0e.firebaseapp.com",
-  'databaseURL': "https://eyear-87a0e-default-rtdb.firebaseio.com",
-  'projectId': "eyear-87a0e",
-  'storageBucket': "eyear-87a0e.appspot.com",
-  'messagingSenderId': "337767300301",
-  'appId': "1:337767300301:web:050cb7adf9c7d0e3b8bd84",
-  'measurementId': "G-8SRQ7WFTPK"
-}
-print("config content as a string done.")
-# Initialize Firebase
-firebase = pyrebase.initialize_app(config)
-db = firebase.database()  # Using Realtime Database
-
-print("Firebase initialized successfully.")
 
