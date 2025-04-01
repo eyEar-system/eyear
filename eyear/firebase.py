@@ -13,12 +13,6 @@ from datetime import timedelta
 
 
 
-# Initialize Firebase
-firebase = pyrebase.initialize_app(config)
-db = firebase.database()  # Using Realtime Database
-
-print("Firebase initialized successfully.")
-
 class FirebaseStorageManager:
     def __init__(self, service_account_json, bucket_name):
         """Initialize Firebase Storage with the provided credentials and bucket name."""
