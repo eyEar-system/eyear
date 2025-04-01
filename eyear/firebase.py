@@ -59,3 +59,18 @@ class FirebaseStorageManager:
         except Exception as e:
             print(f"Error downloading file: {e}")
             return None
+
+if __name__ == "__main__":
+    
+    # Initialize the Firebase Storage manager
+    storage_manager = FirebaseStorageManager(json_content, "eyear-87a0e.appspot.com")
+
+    # Upload a file and generate a signed URL
+    signed_url = storage_manager.upload_file("/content/force_data3.bin", "bin/2force_data.bin")
+    if signed_url:
+        print(f"Generated Signed URL: {signed_url}")
+
+    # Download a file from Firebase
+    local_path = storage_manager.download_file("test_voice/latest.wav", "/content/downloaded_file.wav")
+    if local_path:
+        print(f"File downloaded to: {local_path}")

@@ -1,8 +1,7 @@
 
 from .core import EyEar  
 from .firebase import FirebaseStorageManager
-from .var import config
-
+from .var import config, json_content
 print("finish library")
 
 
