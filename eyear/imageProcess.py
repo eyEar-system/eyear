@@ -27,11 +27,10 @@ class ImageCaptionGenerator:
         return caption
 
 if __name__ == "__main__":
-    # استخدام الكود
-    image_path = "/content/FB_IMG_1618224319830.jpg"  # استبدل بمسار الصورة التي قمت بتحميلها
+
+    image_path = "/content/image.jpg" 
     image_caption_generator = ImageCaptionGenerator()
 
-    # إذا قمت بتحميل الصورة عبر Google Colab
     caption = image_caption_generator.predict_caption(image_path)
     print(f"Generated Caption: {caption}")
 
@@ -42,6 +41,7 @@ model_yolo = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 
 class ImageQA:
     def __init__(self, image_path):
+        print("models : Plib , dirt , yolo")
         self.image_path = image_path
         self.processor_detr = DetrImageProcessor.from_pretrained("facebook/detr-resnet-50")
         self.model_detr = DetrForObjectDetection.from_pretrained("facebook/detr-resnet-50")

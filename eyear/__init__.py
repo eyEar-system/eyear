@@ -1,6 +1,6 @@
 
 from .core import EyEar  
-from .firebase import FirebaseStorageManager , FirebaseRealtimeManager
+from .firebase import FirebaseStorageManager ,FirebaseRealtimeManager
 from .imageProcess import ImageCaptionGenerator , ImageQA
 
 print("import finish")
