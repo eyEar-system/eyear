@@ -1,5 +1,5 @@
 
-## FirebaseStorageManager
+# FirebaseStorageManager
 
 ### Initialize storage
 ```python
@@ -18,13 +18,13 @@
 ### upload
 ```python
     # Upload a file and generate a signed URL
-    signed_url = storage_manager.upload_file("content/downloaded_file.wav", "test_voice/latest.wav")
+    signed_url = storage_manager.upload_file("/content/downloaded_file.wav", "test_voice/latest.wav")
     if signed_url:
         print(f"Generated Signed URL: {signed_url}")
 ```
 
 
-## FirebaseRealtimeManager
+# FirebaseRealtimeManager
 ```python 
     # Initialize Firebase Realtime Database
     firebase_config = FirebaseRealtimeManager()
