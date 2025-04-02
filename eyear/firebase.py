@@ -20,7 +20,6 @@ class FirebaseStorageManager:
     def _initialize_firebase(self):
         """Initialize Firebase if not already initialized."""
         if not firebase_admin._apps:
-            # تغيير اسم المتغير هنا لتجنب التعارض
             # Use credentials.Certificate instead of firebase_credentials.Certificate
             firebase_cred = credentials.Certificate(json.loads(self.service_account_json)) 
             firebase_admin.initialize_app(firebase_cred, {'storageBucket': self.bucket_name})
