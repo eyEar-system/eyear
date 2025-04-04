@@ -91,7 +91,7 @@ print(response)
   [https://ai.meta.com/blog/meta-llama-3](https://ai.meta.com/blog/meta-llama-3)
 
 - Hugging Face model card for LLaMA 3 1.2B:  
-  [https://huggingface.co/meta-llama/Llama-3-1.2B-Instruct](https://huggingface.co/meta-llama/Llama-3-1.2B-Instruct)
+  [https://huggingface.co/meta-llama/Llama-3-1.2B-Instruct]([https://huggingface.co/meta-llama/Llama-3-1.2B-Instruct](https://huggingface.co/manycore-research/SpatialLM-Llama-1B))
 
 ### 🔍 مقارنة مع TinyLLaMA
 - TinyLLaMA: Hugging Face Model Card  
