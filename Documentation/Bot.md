@@ -5,9 +5,9 @@
 
 ## use llama 1 B
 ```python 
-from eyear import bot 
+from eyear import Bot 
 
-bot = bot()
+bot = Bot()
 output = bot.start_chat("hello")
 ````
 ---

@@ -2,7 +2,8 @@
 from .core import EyEar  
 from .firebase import FirebaseStorageManager ,FirebaseRealtimeManager
 from .imageProcess import ImageCaptionGenerator , ImageQA
-from .bot import bot
+from .bot import Bot
+from .reasearshbot import ResearchBot
 print("import finish")
 
 

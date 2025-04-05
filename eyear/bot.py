@@ -1,7 +1,10 @@
+#requirment 
+#!pip install huggingface-hub>=0.21.0 transformers>=4.41.0 sentence-transformers==3.4.1 accelerate>=1.5.2 diffusers>=0.23.2
+
 from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 import torch
 
-class bot:
+class Bot:
     def __init__(self, model_name="meta-llama/Llama-3.2-1B-Instruct", token="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"):
         """
         Initializes the ChatBot with a specific model and authentication token.
@@ -56,7 +59,7 @@ class bot:
 # Example Usage - Dynamic interaction
 if __name__ == "__main__":
     # Initialize the bot
-    bot = ChatBot()
+    bot = bot()
 
     # Start chatting
     bot.start_chat("hello")

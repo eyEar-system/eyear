@@ -9,6 +9,8 @@
 
 ```python
 from eyear import ResearchBot
+Research_Bot = ResearchBot ()
+
 ```
 
 ###. **طرح الأسئلة**
@@ -22,21 +24,21 @@ from eyear import ResearchBot
 مثال على سؤال من المستوى الأول:
 
 ```python
-answer = ResearchBot.answer_question("Where is Cairo?", "first")
+answer = Research_Bot.answer_question("Where is Cairo?", "first")
 print(answer)
 ```
 
 مثال على سؤال من المستوى الثاني:
 
 ```python
-answer = ResearchBot.answer_question("What is the capital of France?", "second")
+answer = Research_Bot.answer_question("What is the capital of France?", "second")
 print(answer)
 ```
 
 مثال على سؤال من المستوى الثالث:
 
 ```python
-answer = ResearchBot.answer_question("Who invented the telephone?", "third")
+answer = Research_Bot.answer_question("Who invented the telephone?", "third")
 print(answer)
 ```
 
