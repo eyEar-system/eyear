@@ -1,6 +1,3 @@
-#requirments
-#!pip install pydub gtts
-
 from pydub import AudioSegment
 from pydub.playback import play
 from gtts import gTTS
@@ -106,7 +103,7 @@ class TTS:
         """
         try:
             # Create an instance of the TextToSpeech class with the text and language.
-            speech = TextToSpeech(text, lang, slow=False, speed_factor=1.4, pitch_factor=0.85)
+            speech = TTS(text, lang, slow=False, speed_factor=1.4, pitch_factor=0.85)
 
             # Convert the text to speech and save the initial audio.
             speech.convert_to_speech()
@@ -118,7 +115,7 @@ class TTS:
             speech.play_audio()
         finally:
             # Clean up temporary files.
-            speech.clean_up()
+              speech.clean_up()
 
 # Example usage
 if __name__ == "__main__":
