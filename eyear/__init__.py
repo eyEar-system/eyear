@@ -8,7 +8,7 @@ from .bot import Bot
 from .researchbot import ResearchBot
 from .tts import TTS
 from .voicerecognation import VoiceRecognation
-
+from .ocr import OCR
 print(" finish import")
 
 
