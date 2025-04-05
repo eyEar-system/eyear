@@ -4,10 +4,10 @@ from pydub import AudioSegment
 import re
 
 class VoiceRecognation:
-    def __init__(self, mp3_file):
+    def __init__(self, mp3_file , db_lang):
         self.mp3_file = mp3_file
         self.wav_file = mp3_file.replace(".mp3", ".wav")
-
+        self.db_lang = db_lang
     def convert_to_wav(self):
         """Converts an MP3 file to WAV format."""
         try:
@@ -37,16 +37,10 @@ class VoiceRecognation:
         text = text.strip()  # Remove leading/trailing spaces
         return text
 
-    def detect_language(self, text):
-
-
-        # Initialize Firebase Realtime Database
-        firebase_config = FirebaseRealtimeManager()
-        db = firebase_config.get_db()
-        print("Database connected.")
+    def detect_language(self, text ):
+        db_lang = self.db_lang
 
         # Get data
-        db_lang = db.child("lang").get().val()
         print(db_lang)
 
         if db_lang == 'ar':
@@ -97,6 +91,6 @@ class VoiceRecognation:
 # Example usage:
 if __name__ == "__main__":
     mp3_file = "/content/latest.wav"  
-    audio_processor = VoiceRecognation(mp3_file)
+    audio_processor = VoiceRecognation(mp3_file , "ar")
     transcription, language, confidence = audio_processor.process_audio()
     print(f"Transcription for {mp3_file}:\n{transcription} \nDetected Language: {language} with Confidence: {confidence}")
