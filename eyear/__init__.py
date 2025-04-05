@@ -1,10 +1,15 @@
 
+print(" start import")
+
 from .core import EyEar  
 from .firebase import FirebaseStorageManager ,FirebaseRealtimeManager
 from .imageProcess import ImageCaptionGenerator , ImageQA
 from .bot import Bot
-from .reasearshbot import ResearchBot
-print("import finish")
+from .researchbot import ResearchBot
+from .tts import TTS
+from .voicerecognation import VoiceRecognation
+
+print(" finish import")
 
 
 
