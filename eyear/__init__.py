@@ -18,6 +18,13 @@ from .ocr import OCR
 print("Done : " , "from .ocr import OCR")
 from .handgusteur import HandGusteur
 print("Done : " , "from .handgusteur import HandGusteur")
+from .Intentclassifier import IntentClassifier
+print("Done : " , "from .Intentclassifier import IntentClassifier")
+from .rawdata import raw_training_data
+print("Done : " , "from .rawdata import raw_training_data")
+from trainingdata import TrainingData
+print("Done : " , "from trainingdata import TrainingData")
+
 
 print(" finish import")
 
