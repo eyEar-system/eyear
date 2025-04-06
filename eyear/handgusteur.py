@@ -3,7 +3,7 @@ import mediapipe as mp
 import math
 import gc
 
-class GestureRecognition:
+class HandGusteur:
     def __init__(self):
         self.mp_hands = mp.solutions.hands
         self.hands = self.mp_hands.Hands()
@@ -150,7 +150,7 @@ class GestureRecognition:
 
 # Example usage
 if __name__ == "__main__":
-    gesture_recognition = GestureRecognition()
+    gesture_recognition = HandGusteur()
 
     # Process image
     image_path = "/content/test.jpg"
