@@ -3,13 +3,21 @@ print(" start import")
 
 from .core import EyEar  
 from .firebase import FirebaseStorageManager ,FirebaseRealtimeManager
+print("Done : " , "from .firebase import FirebaseStorageManager ,FirebaseRealtimeManager")
 from .imageProcess import ImageCaptionGenerator , ImageQA
+print("Done : " , "from .imageProcess import ImageCaptionGenerator , ImageQA")
 from .bot import Bot
+print("Done : " , "from .bot import Bot")
 from .researchbot import ResearchBot
+print("Done : " , "from .researchbot import ResearchBot")
 from .tts import TTS
+print("Done : " , "from .tts import TTS")
 from .voicerecognation import VoiceRecognation
+print("Done : " , "from .voicerecognation import VoiceRecognation")
 from .ocr import OCR
+print("Done : " , "from .ocr import OCR")
 from .handgusteur import HandGusteur
+print("Done : " , "from .handgusteur import HandGusteur")
 
 print(" finish import")
 
