@@ -47,6 +47,7 @@ The next step is to process the image using the code to extract the hand and ges
 
 ```python
 # Process the image and extract data
+gesture_recognition = HandGusteur()
 data = gesture_recognition.process_image(image_path)
 ```
 
