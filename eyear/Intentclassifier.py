@@ -1,4 +1,11 @@
 import nltk
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, accuracy_score
+import joblib
+
+
 # Ensure required NLTK resources are downloaded
 nltk.download('stopwords')
 nltk.download('wordnet')
