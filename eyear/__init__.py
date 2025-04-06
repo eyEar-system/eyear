@@ -22,7 +22,7 @@ from .Intentclassifier import IntentClassifier
 print("Done : " , "from .Intentclassifier import IntentClassifier")
 from .rawdata import raw_training_data
 print("Done : " , "from .rawdata import raw_training_data")
-from trainingdata import TrainingData
+from .trainingdata import TrainingData
 print("Done : " , "from trainingdata import TrainingData")
 
 
