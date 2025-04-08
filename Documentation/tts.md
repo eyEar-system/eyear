@@ -15,16 +15,12 @@ pip install gtts pydub
 ```
 
 ```python
-# Example usage
-if __name__ == "__main__":
+# Create TTS object 
+tts = TTS()
 
-    # Example usage for Arabic
-    arabic_text = "مرحباً بكم في تجربة تحويل النصوص إلى كلام."
-    TTS.text_to_speech(arabic_text, 'ar')
-
-    # Example usage for English
-    english_text = "Welcome to the text-to-speech conversion demo."
-    TTS.text_to_speech(english_text, 'en')
+# Directly set parameters and perform text-to-speech
+english_text = "Welcome to the text-to-speech conversion demo."
+tts.text_to_speech(english_text, lang="en", slow=False, speed_factor=1.4, pitch_factor=0.85)
 
 
 ```

@@ -5,25 +5,28 @@ import os
 
 
 class TTS:
-    def __init__(self, text, lang, slow=False, speed_factor=1.5, pitch_factor=1.2):
+    def __init__(self):
         """
-        Initialize the TextToSpeech class with the required parameters.
+        Initialize the TextToSpeech class with default parameters.
+        """
+        self.text = ""  # Default text (empty string)
+        self.lang = "en"  # Default language (English)
+        self.slow = False  # Default speed (normal speed)
+        self.speed_factor = 1.5  # Default speed factor
+        self.pitch_factor = 1.2  # Default pitch factor
+        self.audio_path = "/content/output_gtts.mp3"  # Path for the initial speech file.
+        self.final_audio_path = "/content/output.mp3"  # Path for the final modified speech file.
+        self.wav_audio_path = "/content/output.wav"   # Path for the final WAV file.
 
-        Parameters:
-        - text: The text to convert to speech.
-        - lang: The language of the text (e.g., 'ar' for Arabic, 'en' for English).
-        - slow: Whether the speech should be slow (default is False).
-        - speed_factor: The factor by which to speed up the speech (default is 1.5).
-        - pitch_factor: The factor by which to increase the pitch of the speech (default is 1.2).
+    def set_parameters(self, text, lang="en", slow=False, speed_factor=1.5, pitch_factor=1.2):
+        """
+        Set parameters for the text-to-speech conversion.
         """
         self.text = text
         self.lang = lang
         self.slow = slow
         self.speed_factor = speed_factor
         self.pitch_factor = pitch_factor
-        self.audio_path = "/content/output_gtts.mp3"  # Path for the initial speech file.
-        self.final_audio_path = "/content/output.mp3"  # Path for the final modified speech file.
-        self.wav_audio_path = "/content/output.wav"   # Path for the final WAV file.
 
     def convert_to_speech(self):
         """
@@ -92,38 +95,31 @@ class TTS:
         except Exception as e:
             print(f"Error during cleanup: {e}")
 
-    @staticmethod
-    def text_to_speech(text, lang):
+    def text_to_speech(self, text, lang="en", slow=False, speed_factor=1.5, pitch_factor=1.2):
         """
-        Convert text to speech, modify the audio, and play it.
-
-        Parameters:
-        - text: The text to be converted to speech.
-        - lang: The language code (e.g., 'ar' for Arabic, 'en' for English).
+        This method is used to process the text-to-speech conversion, modify it, and play the audio.
         """
+        # Set parameters and perform conversion
+        self.set_parameters(text, lang, slow, speed_factor, pitch_factor)
         try:
-            # Create an instance of the TextToSpeech class with the text and language.
-            speech = TTS(text, lang, slow=False, speed_factor=1.4, pitch_factor=0.85)
-
             # Convert the text to speech and save the initial audio.
-            speech.convert_to_speech()
+            self.convert_to_speech()
 
             # Modify the audio by changing speed and pitch and save copies in MP3 and WAV formats.
-            speech.modify_audio()
+            self.modify_audio()
 
             # Play the final modified audio.
-            speech.play_audio()
+            self.play_audio()
         finally:
             # Clean up temporary files.
-              speech.clean_up()
+            self.clean_up()
 
-# Example usage
+
+# Example usage with instantiation of TTS class
 if __name__ == "__main__":
+    # Create TTS object without arguments
+    tts = TTS()
 
-    # Example usage for Arabic
-    arabic_text = "مرحباً بكم في تجربة تحويل النصوص إلى كلام."
-    TTS.text_to_speech(arabic_text, 'ar')
-
-    # Example usage for English
+    # Directly set parameters and perform text-to-speech
     english_text = "Welcome to the text-to-speech conversion demo."
-    TTS.text_to_speech(english_text, 'en')
+    tts.text_to_speech(english_text, lang="en", slow=False, speed_factor=1.4, pitch_factor=0.85)
