@@ -20,12 +20,12 @@ The `OCR` class allows you to:
 
 ```bash
 pip install pytesseract Pillow
-
+```
 
 ``` python 
 
 if __name__ == "__main__":
     image_path = "/content/test.jpg"  # Update with your actual image path
-    extractor = OCR(image_path)
-    extracted_text = extractor.extract_text_from_image()
+    extractor = OCR()
+    extracted_text = extractor.extract_text_from_image(image_path)
     ```
