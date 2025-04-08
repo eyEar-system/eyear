@@ -24,12 +24,13 @@ pip install langdetect SpeechRecognition pydub
 ```
 ```python
 
-
 # Example usage:
 if __name__ == "__main__":
     mp3_file = "/content/latest.wav"
-    audio_processor = VoiceRecognation(mp3_file , "ar")
+    audio_processor = VoiceRecognation()
+    audio_processor.load_file(mp3_file, "ar")
     transcription, language, confidence = audio_processor.process_audio()
     print(f"Transcription for {mp3_file}:\n{transcription} \nDetected Language: {language} with Confidence: {confidence}")
+
 
 ```
