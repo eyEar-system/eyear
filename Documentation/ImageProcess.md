@@ -14,25 +14,22 @@ Generat image caption only
 use 3 models YOLO , BLIP ,DERT
 answer the quistions
 ```python
-    image_path = "/content/image.jpg"
-    processor = ImageQA(image_path)
+image_path = "/content/image.jpg"
+processor = ImageQA()
 
-    yolo_objects = processor.detect_objects_with_yolo()
-    print("YOLOv5 Detected Objects:", yolo_objects)
+yolo_objects = processor.detect_objects_with_yolo(image_path)
+print("YOLOv5 Detected Objects:", yolo_objects)
 
-    detr_objects = processor.detect_objects_with_detr()
-    print("DETR Detected Objects:", detr_objects)
+detr_objects = processor.detect_objects_with_detr(image_path)
+print("DETR Detected Objects:", detr_objects)
 
-    questions = [
-        "How many people are in the image?",
-        "What is the main object in the image?",
-        "What colors are in the image?",
-        "Is there a person in the image?",
-        "Where is the car located in the image?",
-        "What activity is happening in the image?"
-    ]
+questions = [
+    "How many people are in the image?",
+    "What is the main object in the image?",
+    "What colors are in the image?",
+]
 
-    for question in questions:
-        answer = processor.answer_question(question)
-        print(f"Q: {question}\nA: {answer}\n")
+for question in questions:
+    answer = processor.answer_question(question, image_path)
+    print(f"Q: {question}\nA: {answer}\n")
 ```
