@@ -1,19 +1,15 @@
-#Requirments 
-#!pip install pytesseract
-#!sudo apt install tesseract-ocr
-
 from PIL import Image
 import pytesseract
 
 class OCR:
-    def __init__(self, image_path):
-        self.image_path = image_path
+    def __init__(self):
+        pass
 
-    def extract_text_from_image(self):
+    def extract_text_from_image(self, image_path):
         """Extract text from an image using pytesseract."""
         try:
             # Open the image from the path
-            image = Image.open(self.image_path)
+            image = Image.open(image_path)
 
             # Extract text using pytesseract
             extracted_text = pytesseract.image_to_string(image)
@@ -31,5 +27,5 @@ class OCR:
 
 if __name__ == "__main__":
     image_path = "/content/test.jpg"  # Update with your actual image path
-    extractor = OCR(image_path)
-    extracted_text = extractor.extract_text_from_image()
+    extractor = OCR()
+    extracted_text = extractor.extract_text_from_image(image_path)
