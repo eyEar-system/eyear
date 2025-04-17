@@ -2,27 +2,27 @@
 print(" start import")
 
 from .core import EyEar  
-from .l1.firebase import FirebaseStorageManager ,FirebaseRealtimeManager
+from  .firebase import FirebaseStorageManager ,FirebaseRealtimeManager
 print("Done : " , "from .firebase import FirebaseStorageManager ,FirebaseRealtimeManager")
-from .l1.imageProcess import ImageCaptionGenerator , ImageQA
+from  .imageProcess import ImageCaptionGenerator , ImageQA
 print("Done : " , "from .imageProcess import ImageCaptionGenerator , ImageQA")
-from .l1.bot import Bot
+from  .bot import Bot
 print("Done : " , "from .bot import Bot")
-from .l1.researchbot import ResearchBot
+from  .researchbot import ResearchBot
 print("Done : " , "from .researchbot import ResearchBot")
-from .l1.tts import TTS
+from  .tts import TTS
 print("Done : " , "from .tts import TTS")
-from .l1.voicerecognation import VoiceRecognation
+from  .voicerecognation import VoiceRecognation
 print("Done : " , "from .voicerecognation import VoiceRecognation")
-from .l1.ocr import OCR
+from  .ocr import OCR
 print("Done : " , "from .ocr import OCR")
-from .l1.handgusteur import HandGusteur
+from  .handgusteur import HandGusteur
 print("Done : " , "from .handgusteur import HandGusteur")
-from .l1.Intentclassifier import IntentClassifier
+from  .Intentclassifier import IntentClassifier
 print("Done : " , "from .Intentclassifier import IntentClassifier")
-from .l1.rawdata import raw_training_data
+from  .rawdata import raw_training_data
 print("Done : " , "from .rawdata import raw_training_data")
-from .l1.trainingdata import TrainingData
+from  .trainingdata import TrainingData
 print("Done : " , "from trainingdata import TrainingData")
 
 
