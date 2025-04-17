@@ -2,7 +2,7 @@
 print(" start import")
 
 from .core import EyEar  
-from .l1.firebase import FirebaseStorageManager ,FirebaseRealtimeManager
+from l1.firebase import FirebaseStorageManager ,FirebaseRealtimeManager
 print("Done : " , "from .firebase import FirebaseStorageManager ,FirebaseRealtimeManager")
 from .l1.imageProcess import ImageCaptionGenerator , ImageQA
 print("Done : " , "from .imageProcess import ImageCaptionGenerator , ImageQA")
