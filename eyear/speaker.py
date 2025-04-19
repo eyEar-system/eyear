@@ -8,10 +8,9 @@ from pydub.exceptions import CouldntDecodeError
 from eyear import FirebaseRealtimeManager, FirebaseStorageManager , json_content
 
 class Speaker:
-    def __init__(self):
-        self.storage_manager = FirebaseStorageManager(json_content, "eyear-87a0e.appspot.com")
-        self.firebase_config = FirebaseRealtimeManager()
-        self.db = self.firebase_config.get_db()
+    def __init__(self ,storage_manager ,db ):
+        self.storage_manager = storage_manager
+        self.db = db
         self.output_directory = "output/"
         self.max_file_size = 40923
 
