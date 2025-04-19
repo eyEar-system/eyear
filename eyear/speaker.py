@@ -5,7 +5,6 @@ import wave
 from gtts import gTTS
 from pydub import AudioSegment
 from pydub.exceptions import CouldntDecodeError
-from eyear import FirebaseRealtimeManager, FirebaseStorageManager , json_content
 
 class Speaker:
     def __init__(self ,storage_manager ,db ):
