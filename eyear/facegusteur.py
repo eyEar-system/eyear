@@ -24,9 +24,9 @@ class FaceGusteur:
         return self.data
 
     def detect_head_movement(self):
-        db.child("/wearable_device/z-sensors/sensors").update({"new" : False})
+        self.db.child("/wearable_device/z-sensors/sensors").update({"new" : False})
         while True:
-            new = db.child("/wearable_device/z-sensors/sensors/new").get().val()
+            new = self.db.child("/wearable_device/z-sensors/sensors/new").get().val()
             if new == True:
                 break
         if not self.data :
