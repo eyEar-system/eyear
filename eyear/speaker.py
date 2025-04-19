@@ -131,6 +131,6 @@ class Speaker:
         print("Done ✅")
 
 if __name__ == "__main__":
-    speaker = Speaker()
+    speaker = Speaker(storage_manager , db)
 
     speaker.process("Hello, this is a test for text to speech using gTTS.", lang='en')

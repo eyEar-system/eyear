@@ -28,6 +28,9 @@ from .speaker import Speaker
 print("Done : " , "from .speaker import Speaker ")
 from .facegusteur import FaceGusteur
 print("Done : " , "from .facegusteur import FaceGusteur")
+from .casecommand import CaseCommand
+print("Done : " , "from .casecommand import CaseCommand")
+
 
 print(" finish import")
 
