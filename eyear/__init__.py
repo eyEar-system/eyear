@@ -24,7 +24,10 @@ from  .rawdata import raw_training_data
 print("Done : " , "from .rawdata import raw_training_data")
 from  .trainingdata import TrainingData
 print("Done : " , "from trainingdata import TrainingData")
-
+from .speaker import Speaker 
+print("Done : " , "from .speaker import Speaker ")
+from .facegusteur import FaceGusteur
+print("Done : " , "from .facegusteur import FaceGusteur")
 
 print(" finish import")
 
