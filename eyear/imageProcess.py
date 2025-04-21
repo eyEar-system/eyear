@@ -1,41 +1,7 @@
-#requirmennts
-#!pip install torch transformers Pillow
-
-
-from PIL import Image  # Ensure correct import
 import torch
-from transformers import BlipProcessor, BlipForConditionalGeneration
-
-class ImageCaptionGenerator:
-    def __init__(self, model_name="Salesforce/blip-image-captioning-base"):
-        # تحميل النماذج
-        print("ImageCaptionGenerator : Salesforce/blip-image-captioning-base model")
-        self.processor = BlipProcessor.from_pretrained(model_name)
-        self.model = BlipForConditionalGeneration.from_pretrained(model_name).to("cuda" if torch.cuda.is_available() else "cpu")
-
-    def predict_caption(self, image_path):
-        # فتح الصورة
-        image = Image.open(image_path).convert('RGB')
-
-        # تجهيز المدخلات
-        inputs = self.processor(image, return_tensors="pt").to("cuda" if torch.cuda.is_available() else "cpu")
-
-        # توليد الوصف
-        output = self.model.generate(**inputs)
-        caption = self.processor.decode(output[0], skip_special_tokens=True)
-
-        return caption
-
-if __name__ == "__main__":
-
-    image_path = "/content/image.jpg" 
-    image_caption_generator = ImageCaptionGenerator()
-
-    caption = image_caption_generator.predict_caption(image_path)
-    print(f"Generated Caption: {caption}")
-
-
+from PIL import Image
 from transformers import DetrImageProcessor, DetrForObjectDetection, BlipProcessor, BlipForQuestionAnswering
+import math
 
 model_yolo = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 
@@ -69,14 +35,32 @@ class ImageQA:
         outputs = self.model_blip.generate(**inputs)
         answer = self.processor_blip.decode(outputs[0], skip_special_tokens=True)
         return answer
+      
+      
+    def get_nearest_object(self, x, y, image_path):
+        detected_objects = self.detect_objects_with_detr(image_path)  # أو يمكنك استخدام detect_objects_with_yolo بدلاً من ذلك
+        nearest_object = None
+        min_distance = float('inf')
+        for obj in detected_objects:
+            xmin, ymin, xmax, ymax = obj['box']
+            center_x = (xmin + xmax) / 2
+            center_y = (ymin + ymax) / 2
+            distance = math.sqrt((center_x - x) ** 2 + (center_y - y) ** 2)
+            if distance < min_distance:
+                nearest_object = obj
+                min_distance = distance
+        return nearest_object
+
+
 if __name__ == "__main__":
     image_path = "/content/test.jpg"
-    processor = ImageQA()
+    image_QA = ImageQA()
+    x, y = 200, 150  # إحداثيات النقطة
 
-    yolo_objects = processor.detect_objects_with_yolo(image_path)
+    yolo_objects = image_QA.detect_objects_with_yolo(image_path)
     print("YOLOv5 Detected Objects:", yolo_objects)
 
-    detr_objects = processor.detect_objects_with_detr(image_path)
+    detr_objects = image_QA.detect_objects_with_detr(image_path)
     print("DETR Detected Objects:", detr_objects)
 
     questions = [
@@ -86,5 +70,9 @@ if __name__ == "__main__":
     ]
 
     for question in questions:
-        answer = processor.answer_question(question, image_path)
+        answer = image_QA.answer_question(question, image_path)
         print(f"Q: {question}\nA: {answer}\n")
+    
+    #TIP finger
+    nearest_object = image_QA.get_nearest_object(x, y, image_path)
+    print("Nearest Object:", nearest_object)
