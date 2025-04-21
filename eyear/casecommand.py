@@ -6,6 +6,8 @@ class CaseCommand:
           print("image_caption")
         elif Command == "image_QA":
           print("image_QA") 
+        elif Command == None :
+          pass
         else:
           print("error : unknow command ")
 

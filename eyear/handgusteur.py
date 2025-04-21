@@ -34,7 +34,7 @@ class HandGusteur:
                 # Calculate bounding box
                 bounding_box = self.calculate_bounding_box(landmarks.landmark)
                 data["bounding_boxes"].append(bounding_box)
-                
+
                 # Detect the gesture
                 gesture = self.detect_gesture(landmarks.landmark, image.shape[1], image.shape[0])
                 data["gestures"].append(gesture)
@@ -148,6 +148,16 @@ class HandGusteur:
         """Close the MediaPipe hands model."""
         self.hands.close()
 
+    def data_gusteur_converter(self , gusteur):
+        if gusteur == "open_hand":
+            return "image_caption"
+        elif gusteur == "fist":
+            return "fist"
+        elif gusteur == "peace_sign":
+            return "peace_sign"
+        else :
+            return None
+
 # Example usage
 if __name__ == "__main__":
     gesture_recognition = HandGusteur()
@@ -171,3 +181,4 @@ if __name__ == "__main__":
 
     # Close the model when done
     gesture_recognition.close()
+

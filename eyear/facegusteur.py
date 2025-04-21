@@ -25,8 +25,14 @@ class FaceGusteur:
 
     def detect_head_movement(self):
         self.db.child("/wearable_device/z-sensors/sensors").update({"new" : False})
+        i = 0 
         while True:
             new = self.db.child("/wearable_device/z-sensors/sensors/new").get().val()
+            time.sleep(1)
+            i += 1
+            if i == 20:
+              print("error : there is problem in esp32-cam , the device dosent work probebly")
+
             if new == True:
                 break
         if not self.data :
@@ -56,7 +62,7 @@ class FaceGusteur:
         elif az > ax-(ax/2) and az > ay-(ax/2) and self.data["accel_z"] < 0 :
             return "Look dowen"
         else:
-            return "Still"
+            return None
 
 if __name__ == "__main__" :
       
