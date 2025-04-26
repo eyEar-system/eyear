@@ -35,7 +35,7 @@
 ### Add data
 ```python 
     # Add data
-    db.child("test").set({"LED": True})
+    db.child("test").update({"LED": True})
     print("LED flag is True.")
 ```
 

@@ -1,3 +1,39 @@
+#!pip install torch transformers Pillow
+
+
+from PIL import Image  # Ensure correct import
+import torch
+from transformers import BlipProcessor, BlipForConditionalGeneration
+
+class ImageCaptionGenerator:
+    def __init__(self, model_name="Salesforce/blip-image-captioning-base"):
+        # تحميل النماذج
+        print("ImageCaptionGenerator : Salesforce/blip-image-captioning-base model")
+        self.processor = BlipProcessor.from_pretrained(model_name)
+        self.model = BlipForConditionalGeneration.from_pretrained(model_name).to("cuda" if torch.cuda.is_available() else "cpu")
+
+    def predict_caption(self, image_path):
+        # فتح الصورة
+        image = Image.open(image_path).convert('RGB')
+
+        # تجهيز المدخلات
+        inputs = self.processor(image, return_tensors="pt").to("cuda" if torch.cuda.is_available() else "cpu")
+
+        # توليد الوصف
+        output = self.model.generate(**inputs)
+        caption = self.processor.decode(output[0], skip_special_tokens=True)
+
+        return caption
+
+if __name__ == "__main__":
+
+    image_path = "/content/image.jpg" 
+    image_caption_generator = ImageCaptionGenerator()
+
+    caption = image_caption_generator.predict_caption(image_path)
+    print(f"Generated Caption: {caption}")
+
+
 import torch
 from PIL import Image
 from transformers import DetrImageProcessor, DetrForObjectDetection, BlipProcessor, BlipForQuestionAnswering
