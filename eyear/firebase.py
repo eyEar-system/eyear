@@ -152,7 +152,7 @@ if __name__ == "__main__":
         if success:
             print("All voice files uploaded successfully!")
         else:
-        print("Failed to upload voice files.")
+            print("Failed to upload voice files.")
 
 
 class FirebaseRealtimeManager:
