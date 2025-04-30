@@ -30,6 +30,12 @@ from .facegusteur import FaceGusteur
 print("Done : " , "from .facegusteur import FaceGusteur")
 from .casecommand import CaseCommand
 print("Done : " , "from .casecommand import CaseCommand")
+from .facerecognation import FaceRecognition
+print("Done : " , "from .facerecognation import FaceRecognition")
+from .memorybot import MemoryBot
+print("Done : " , "from .memorybot import MemoryBot")
+
+
 
 print(" finish import")
 

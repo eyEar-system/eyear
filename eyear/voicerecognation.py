@@ -114,7 +114,7 @@ class VoiceRecognation:
 # Example usage:
 if __name__ == "__main__":
     mp3_file = "/content/latest.wav"
-    audio_processor = VoiceRecognation()
-    audio_processor.load_file(mp3_file, "en")
-    transcription, language, confidence = audio_processor.process_audio()
+    voice_recognation = VoiceRecognation()
+    voice_recognation.load_file(mp3_file, "en")
+    transcription, language, confidence = voice_recognation.process_audio()
     print(f"\nTranscription for {mp3_file}:\n{transcription}\n\nDetected Language: {language} with Confidence: {confidence}")

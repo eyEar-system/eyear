@@ -1,5 +1,3 @@
-import time
-
 class FaceGusteur:
     def __init__(self, db):
         self.db = db
@@ -26,8 +24,10 @@ class FaceGusteur:
         return self.data
 
     def detect_head_movement(self):
+        self.head_movement = None
+
         self.db.child("/wearable_device/z-sensors/sensors").update({"new" : False})
-        i = 0 
+        i = 0
         while True:
             new = self.db.child("/wearable_device/z-sensors/sensors/new").get().val()
             time.sleep(1)
@@ -54,20 +54,31 @@ class FaceGusteur:
 
         # Detect based on accelerometer and gyroscope
         if ax-(ax/2) > ay and ax-(ax/2) > az:
+            self.head_movement = "Look forward"
             return "Look forward"
         elif ay > ax-(ax/2) and ay > az-(ax/2) and self.data["accel_y"] > 0 :
+            self.head_movement = "Look side left"
             return "Look side left"
         elif ay > ax-(ax/2) and ay > az-(ax/2) and self.data["accel_y"] < 0 :
+            self.head_movement = "Look side right"
             return "Look side right"
         elif az > ax-(ax/2) and az > ay-(ax/2) and self.data["accel_z"] > 0 :
+            self.head_movement = "Look up"
             return "Look up"
         elif az > ax-(ax/2) and az > ay-(ax/2) and self.data["accel_z"] < 0 :
+            self.head_movement = "Look down"
             return "Look dowen"
         else:
+            self.head_movement = None
             return None
 
+    def data_gusteur_converter(self):
+        if self.head_movement == "Look forward":
+          return "image_caption"
+
+
 if __name__ == "__main__" :
-      
+
     face_gusteur = FaceGusteur(db)
 
     # Print raw data
@@ -81,3 +92,5 @@ if __name__ == "__main__" :
         gesture = face_gusteur.detect_head_movement()
         if gesture != "Look forward":
           print("Detected Head Movement:", gesture)
+
+          command = face_gusteur.data_gusteur_converter()
