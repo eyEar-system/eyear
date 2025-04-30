@@ -5,7 +5,6 @@ import wave
 from gtts import gTTS
 from pydub import AudioSegment
 from pydub.exceptions import CouldntDecodeError
-from eyear import FirebaseRealtimeManager, FirebaseStorageManager , json_content
 
 class Speaker:
     def __init__(self ,storage_manager ,db ):
@@ -107,25 +106,15 @@ class Speaker:
             offset += self.max_file_size
             file_count += 1
 
-        # Adjust the pitch of the audio
         wav_filename = f"{self.output_directory}full_audio.wav"
         if isinstance(original_wav, bytes):
             original_wav = io.BytesIO(original_wav)
 
-        # Load the audio data
-        audio = AudioSegment.from_wav(original_wav)
-
-        # Lower the pitch (shift by -2 semitones as an example)
-        lower_pitch_audio = audio._spawn(audio.raw_data, overrides={
-            "frame_rate": int(audio.frame_rate * 0.65)  # Lower pitch by 20%
-        })
-
-        # Save the new audio with the lower pitch
-        lower_pitch_audio.export(wav_filename, format="wav")
+        with open(wav_filename, 'wb') as f:
+            f.write(original_wav.read())
 
         self.storage_manager.upload_file(wav_filename, "wav/full_audio.wav")
-        print("Full WAV uploaded with lower pitch.")
-
+        print("Full WAV uploaded.")
         coun = file_count - 1
         self.db.child("/wearable_device").update({"FileNum": coun})
         self.db.child("/wearable_device/z-sensors").update({"audio_uploaded": True})
