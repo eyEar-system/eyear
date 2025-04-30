@@ -343,7 +343,6 @@ class FaceRecognition:
         # Show the image with bounding boxes and names for all faces
         cv2_imshow(img)
 
-
         return [results , num_faces]
 
 
@@ -358,11 +357,11 @@ if __name__ == "__main__":
 
     results = face_recognition.test()
 
-    #face_recognition.add_face('/content/faces/train_data/name/obama.jpg', 'obama')
+    face_recognition.add_face('/content/faces/train_data/name/obama.jpg', 'obama')
 
-    #face_recognition.remove_face('')
+    face_recognition.remove_face('')
 
-    #face_recognition.update_face('OldName', '/content/faces/train_data/name/obama.jpg', 'obama')
+    face_recognition.update_face('OldName', '/content/faces/train_data/name/obama.jpg', 'obama')
 
     face_recognition.export_report('/content/report.csv')
 
@@ -376,7 +375,7 @@ if __name__ == "__main__":
     # Load model
     face_recognition.load_model('/content/face_model.npz')
 
-    image_path = "/content/latest.jpg"
+    image_path ="/content/latest.jpg"
     results = face_recognition.usage(image_path)
 
     for result in results[0]:
