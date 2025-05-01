@@ -150,11 +150,17 @@ class HandGusteur:
 
     def data_gusteur_converter(self , gusteur):
         if gusteur == "open_hand":
-            return "image_caption"
-        elif gusteur == "fist":
-            return "fist"
+            return "start_record"
         elif gusteur == "peace_sign":
-            return "peace_sign"
+            return "image_caption"
+        elif gusteur == "ok":
+            return "get_ocr"
+        elif gusteur == "thumbs_up":
+            return "yes"
+        elif gusteur == "thumbs_down":
+            return "no"
+        elif gusteur == "fist":
+            return "get_face"
         else :
             return None
 
@@ -178,7 +184,4 @@ if __name__ == "__main__":
 
     # Detected gestures
     print("Detected gestures:", data["gestures"])
-
-    # Close the model when done
-    gesture_recognition.close()
 
