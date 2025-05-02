@@ -90,12 +90,12 @@ class CaseCommand:
                 voice_recognation.load_file(audio_path, lang)
                 transcription, language, confidence = voice_recognation.process_audio()
                 print(f"Transcription for {audio_path}:\n{transcription} \nDetected Language: {language} with Confidence: {confidence}")
-                x = classifier.intent(transcription)                
+                x = classifier.intent(transcription)
                 if x == "yes":
                   self.add_face()
                 else :
                   speaker.process("thanks i will forget this face" , lang)
-                  
+
 
     def get_facenum (self):
         image_path = "/content/latest.jpg"
@@ -179,7 +179,7 @@ class CaseCommand:
             answer = image_QA.answer_question(question, image_path)
             print(f"Q: {question}\nA: {answer}\n")
         speaker.process(f"you asked {question} and answer is {answer}  {answer} " , lang)
-                
+
     def get_ocr (self):
         print("=" * 40, "\nCase Command: get_ocr")
         image_path = "/content/latest.jpg"
@@ -250,7 +250,7 @@ class CaseCommand:
 
         elif Command == "add_memory":
           self.add_memory()
-        
+
         elif Command == "add_face":
           self.add_face()
 
@@ -275,10 +275,10 @@ class CaseCommand:
 
         elif Command == None :
           pass
-    
+
         else:
           print("error : unknow command ")
 
 if __name__ == "__main__":
     case_command = CaseCommand(gesture_recognition , db ,storage_manager , speaker , classifier , bot , image_QA , image_caption_generator, ocr ,research_bot , voice_recognation , face_recognition , lang )
-    case_command.command("ask_research_bot" , "what is biology ")
+    case_command.command("image_caption" , "what is biology ")
