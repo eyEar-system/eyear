@@ -34,7 +34,6 @@ from .facerecognation import FaceRecognition
 print("Done : " , "from .facerecognation import FaceRecognition")
 from .memorybot import MemoryBot
 print("Done : " , "from .memorybot import MemoryBot")
-from .researchbot import ResearchBot
 
 
 
