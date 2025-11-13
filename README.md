@@ -40,5 +40,6 @@ pip install --no-cache-dir git+https://github.com/eyEar-system/eyear.git
 #HandGusteur
 !pip install mediapipe --no-deps
 
-!pip install --upgrade httpx
+# Reinstall httpx to a version compatible with firebase_admin, which was downgraded by googletrans
+!pip install httpx==0.28.1
 ```
