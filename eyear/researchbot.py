@@ -146,7 +146,7 @@ class ResearchBot :
 # Example usage
 if __name__ == "__main__":
     # Instantiate the bot
-    Research = ResearchBot ()
+    Research = ResearchBot()
 
     # Test cases
     test_questions = [

@@ -270,7 +270,7 @@ class CaseCommand:
         elif Command == "ask_time":
           self.ask_time()
 
-        elif command == "ask_memmory_bot":
+        elif Command == "ask_memmory_bot":
           self.ask_memmory_bot()
 
         elif Command == None :
