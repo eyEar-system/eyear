@@ -5,7 +5,7 @@ from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 import torch
 
 class Bot:
-    def __init__(self, model_name="meta-llama/Llama-3.2-1B-Instruct", token="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"):
+    def __init__(self, model_name="meta-llama/Llama-3.2-1B-Instruct", token="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"):
         """
         Initializes the ChatBot with a specific model and authentication token.
         """
