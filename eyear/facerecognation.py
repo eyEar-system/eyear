@@ -19,7 +19,7 @@ class FaceRecognition:
         self.faces_dataset = faces_dataset
 
     def download_trainig_data(self ):
-        storage_manager.download_folder("faces",self.faces_dataset )
+        self.storage_manager.download_folder("faces",self.faces_dataset )
 
     def read_img(self, path):
         img = cv2.imread(path)
