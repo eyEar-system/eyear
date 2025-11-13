@@ -39,7 +39,7 @@ class FaceRecognition:
         return cv2.resize(img, (width, height))
 
     def train(self):
-        known_dir = f"{faces_dataset}/train_data"
+        known_dir = f"{self.faces_dataset}/train_data"
         # دالة لتحميل الصور المعروفة من المجلدات
         for person_folder in os.listdir(known_dir):
             person_path = os.path.join(known_dir, person_folder)
@@ -135,7 +135,7 @@ class FaceRecognition:
                                 self.known_images.append(img_path)  # حفظ الصورة ضمن الصور المعالجة
 
     def test(self, ):
-        unknown_dir = f"{faces_dataset}/test_data"
+        unknown_dir = f"{self.faces_dataset}/test_data"
         # دالة لمعالجة الصور المجهولة
         results = []
         for file in os.listdir(unknown_dir):
