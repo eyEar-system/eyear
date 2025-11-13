@@ -19,7 +19,7 @@ class FaceRecognition:
         self.faces_dataset = faces_dataset
 
     def download_trainig_data(self ):
-        storage_manager.download_folder("faces",faces_dataset )
+        storage_manager.download_folder("faces",self.faces_dataset )
 
     def read_img(self, path):
         img = cv2.imread(path)
@@ -206,7 +206,7 @@ class FaceRecognition:
                     self.known_encodings.append(des)
                     self.known_names.append(name)
                     self.face_data.append({"name": name, "image": face})
-                storage_manager.upload_file(image_path, f"faces/train_data/{name}/{os.path.basename(image_path)}")
+                self.storage_manager.upload_file(image_path, f"faces/train_data/{name}/{os.path.basename(image_path)}")
                 print(f"Face of {name} added.")
 
     def remove_face(self, name):
@@ -357,13 +357,13 @@ if __name__ == "__main__":
 
     results = face_recognition.test()
 
-    face_recognition.add_face('/content/faces/train_data/name/obama.jpg', 'obama')
+    #face_recognition.add_face('/content/faces/train_data/name/obama.jpg', 'obama')
 
-    face_recognition.remove_face('')
+    #face_recognition.remove_face('')
 
-    face_recognition.update_face('OldName', '/content/faces/train_data/name/obama.jpg', 'obama')
+    #face_recognition.update_face('OldName', '/content/faces/train_data/name/obama.jpg', 'obama')
 
-    face_recognition.export_report('/content/report.csv')
+    #face_recognition.export_report('/content/report.csv')
 
     # Save model
     face_recognition.save_model('/content/face_model.npz')
