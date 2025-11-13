@@ -5,7 +5,7 @@ from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 import torch
 
 class Bot:
-    def __init__(self, model_name="meta-llama/Llama-3.2-1B-Instruct", token="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"):
+    def __init__(self, token,  model_name="meta-llama/Llama-3.2-1B-Instruct"):
         """
         Initializes the ChatBot with a specific model and authentication token.
         """
@@ -59,7 +59,7 @@ class Bot:
 # Example Usage - Dynamic interaction
 if __name__ == "__main__":
     # Initialize the bot
-    bot = bot()
+    bot = Bot(token="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")
 
     # Start chatting
     bot.start_chat("hello")
