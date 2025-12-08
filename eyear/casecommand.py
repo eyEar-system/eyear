@@ -38,23 +38,23 @@ class CaseCommand:
     def get_finger_tip (self):
 
           print("=" * 40, "\nCase Command: get_finger_tip")
-          lang = db.child("/user/lang").get().val()
-          speaker.process("start command get finger tip", lang)
+          lang = self.db.child("/user/lang").get().val()
+          self.speaker.process("start command get finger tip", lang)
           image_path = "/content/latest.jpg"
-          data = gesture_recognition.process_image(image_path)
+          data = self.gesture_recognition.process_image(image_path)
           hands_in_frame = data["hands_in_frame"] > 0
           landmarks_complete = hands_in_frame and len(data["landmarks"][0]) > 8
           tip_coords = (data["landmarks"][0][8].x, data["landmarks"][0][8].y) if landmarks_complete else None
           lm_x, lm_y = tip_coords if landmarks_complete else (None, None)
-          nearest_object = image_QA.get_nearest_object(lm_x, lm_y, image_path)
+          nearest_object = self.image_QA.get_nearest_object(lm_x, lm_y, image_path)
           print("tip_coords:", tip_coords)
           try:
               label = nearest_object['label']
               print(f"You are now pointing at {label}")
-              speaker.process(f"You are now pointing at {label}", lang)
+              self.speaker.process(f"You are now pointing at {label}", lang)
           except (TypeError, KeyError):
               print("Error: Unable to access the label from nearest_object.")
-              speaker.process("Error: Unable to identify the object.", lang)
+              self.speaker.process("Error: Unable to identify the object.", lang)
 
 
     def start_record (self):
@@ -65,36 +65,36 @@ class CaseCommand:
     def get_face(self):
         print("=" * 40, "\nCase Command: get_face")
         image_path = "/content/latest.jpg"
-        results = face_recognition.usage(image_path)[0]
-        facenumper = face_recognition.usage(image_path)[1]
+        results = self.face_recognition.usage(image_path)[0]
+        facenumper = self.face_recognition.usage(image_path)[1]
         print(f"Number of faces detected: {facenumper}")
 
         for result in results:
             print(f"Name: {result['name']}, Confidence: {result['confidence']} , num_faces : {result['num_faces']}" )
             if result['name'] != "Unknown":
-                speaker.process(f" a long 60 cm i can see face of  : {result['name']}, Confidence: {int(result['confidence'])}" , lang)
+                self.speaker.process(f" a long 60 cm i can see face of  : {result['name']}, Confidence: {int(result['confidence'])}" , lang)
             else :
-                speaker.process(f"i can see a person but a cant recognize his face do you want to save this face " , lang)
-                db.child("/wearable_device/z-sensors").update({"audio_recorded" : False})
+                self.speaker.process(f"i can see a person but a cant recognize his face do you want to save this face " , lang)
+                self.db.child("/wearable_device/z-sensors").update({"audio_recorded" : False})
                 time.sleep(1)
-                db.child("/wearable_device").update({"record" :True})
+                self.db.child("/wearable_device").update({"record" :True})
                 time.sleep(1)
                 while True :
-                  if db.child("/wearable_device/z-sensors/audio_recorded").get().val():
+                  if self.db.child("/wearable_device/z-sensors/audio_recorded").get().val():
                     break
                     print("audio recorded and start proccesing now")
                 audio_path = "/content/latest.wav"
                 time.sleep(1)
-                local_path = storage_manager.download_file("voice/latest.wav", audio_path)
+                local_path = self.storage_manager.download_file("voice/latest.wav", audio_path)
                 time.sleep(1)
-                voice_recognation.load_file(audio_path, lang)
-                transcription, language, confidence = voice_recognation.process_audio()
+                self.voice_recognation.load_file(audio_path, lang)
+                transcription, language, confidence = self.voice_recognation.process_audio()
                 print(f"Transcription for {audio_path}:\n{transcription} \nDetected Language: {language} with Confidence: {confidence}")
                 x = classifier.intent(transcription)
                 if x == "yes":
                   self.add_face()
                 else :
-                  speaker.process("thanks i will forget this face" , lang)
+                  seld.speaker.process("thanks i will forget this face" , lang)
 
 
     def get_facenum (self):
