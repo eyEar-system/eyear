@@ -59,7 +59,7 @@ class CaseCommand:
 
     def start_record (self):
         print("=" * 40, "\nCase Command: start_record")
-        speaker.process("Recording started. Please speak after the beep", lang)
+        self.speaker.process("Recording started. Please speak after the beep", lang)
         db.child("/wearable_device").update({"record": True})
 
     def get_face(self):
@@ -102,53 +102,53 @@ class CaseCommand:
         print("=" * 40, "\nCase Command: get_facenum")
         results = face_recognition.usage(image_path)[1]
         print(f"Number of faces detected: {results}")
-        speaker.process(f"Number of faces detected: {results}" , lang)
+        self.speaker.process(f"Number of faces detected: {results}" , lang)
 
     def add_memory (self):
         print("=" * 40, "\nCase Command: add_memory")
-        speaker.process("say the memory what you want to save after bib", lang)
+        self.speaker.process("say the memory what you want to save after bib", lang)
         time.sleep(1)
-        db.child("/wearable_device/z-sensors").update({"audio_recorded" : False})
+        self.db.child("/wearable_device/z-sensors").update({"audio_recorded" : False})
         time.sleep(1)
-        db.child("/wearable_device").update({"record" :True})
+        self.db.child("/wearable_device").update({"record" :True})
         time.sleep(1)
         while True :
-          if db.child("/wearable_device/z-sensors/audio_recorded").get().val():
+          if self.db.child("/wearable_device/z-sensors/audio_recorded").get().val():
             break
         print("audio recorded and start proccesing now")
         audio_path = "/content/latest.wav"
         time.sleep(1)
-        local_path = storage_manager.download_file("voice/latest.wav", audio_path)
+        local_path = self.storage_manager.download_file("voice/latest.wav", audio_path)
         time.sleep(1)
         voice_recognation.load_file(audio_path, lang)
-        transcription, language, confidence = voice_recognation.process_audio()
+        transcription, language, confidence = self.voice_recognation.process_audio()
         print(f"Transcription for {audio_path}:\n{transcription} \nDetected Language: {language} with Confidence: {confidence}")
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        speaker.process(f"memmory has saved and you can recall it    {transcription}" , lang)
+        self.speaker.process(f"memmory has saved and you can recall it    {transcription}" , lang)
 
         # Update Firebase with the current time
-        db.child("/memory/memory").update({current_time: transcription})
-        db.child("wearable_device/z-sensors").update({"audio_recorded": False})
+        self.db.child("/memory/memory").update({current_time: transcription})
+        self.db.child("wearable_device/z-sensors").update({"audio_recorded": False})
 
 
     def add_face(self):
         print("=" * 40, "\nCase Command: add_face")
         image_path = "/content/latest.jpg"
-        speaker.process("say the name of the person after bib", lang)
+        self.speaker.process("say the name of the person after bib", lang)
         time.sleep(1)
-        db.child("/wearable_device/z-sensors").update({"audio_recorded" : False})
+        self.db.child("/wearable_device/z-sensors").update({"audio_recorded" : False})
         time.sleep(1)
-        db.child("/wearable_device").update({"record" :True})
+        self.db.child("/wearable_device").update({"record" :True})
         time.sleep(1)
         while True :
-          if db.child("/wearable_device/z-sensors/audio_recorded").get().val():
+          if self.db.child("/wearable_device/z-sensors/audio_recorded").get().val():
             break
         print("audio recorded and start proccesing now")
         audio_path = "/content/latest.wav"
         time.sleep(1)
         local_path = storage_manager.download_file("voice/latest.wav", audio_path)
         time.sleep(1)
-        voice_recognation.load_file(audio_path, lang)
+        self.voice_recognation.load_file(audio_path, lang)
         transcription, language, confidence = voice_recognation.process_audio()
         print(f"Transcription for {audio_path}:\n{transcription} \nDetected Language: {language} with Confidence: {confidence}")
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -167,33 +167,33 @@ class CaseCommand:
         image_path = "/content/latest.jpg"
 
 
-        yolo_objects = image_QA.detect_objects_with_yolo(image_path)
+        yolo_objects = self.image_QA.detect_objects_with_yolo(image_path)
         print("YOLOv5 Detected Objects:", yolo_objects)
 
-        detr_objects = image_QA.detect_objects_with_detr(image_path)
+        detr_objects = self.image_QA.detect_objects_with_detr(image_path)
         print("DETR Detected Objects:", detr_objects)
 
         questions = [question]
 
         for question in questions:
-            answer = image_QA.answer_question(question, image_path)
+            answer = self.image_QA.answer_question(question, image_path)
             print(f"Q: {question}\nA: {answer}\n")
-        speaker.process(f"you asked {question} and answer is {answer}  {answer} " , lang)
+        self.speaker.process(f"you asked {question} and answer is {answer}  {answer} " , lang)
 
     def get_ocr (self):
         print("=" * 40, "\nCase Command: get_ocr")
         image_path = "/content/latest.jpg"
         text = ocr.extract_text_from_image(image_path)
         print(f"Extracted Text: {text}")
-        speaker.process(f"Extracted Text: {text}" , lang)
+        self.speaker.process(f"Extracted Text: {text}" , lang)
 
     def ask_research_bot (self , question):
         print("=" * 40, "\nCase Command: ask_research_bot")
         speaker.process("research bot how detailed information you need ", lang)
         time.sleep(1)
-        db.child("/wearable_device/z-sensors").update({"audio_recorded" : False})
+        self.db.child("/wearable_device/z-sensors").update({"audio_recorded" : False})
         time.sleep(1)
-        db.child("/wearable_device").update({"record" :True})
+        self.db.child("/wearable_device").update({"record" :True})
         time.sleep(1)
         while True :
           if db.child("/wearable_device/z-sensors/audio_recorded").get().val():
@@ -201,9 +201,9 @@ class CaseCommand:
         print("audio recorded and start proccesing now")
         audio_path = "/content/latest.wav"
         time.sleep(1)
-        local_path = storage_manager.download_file("voice/latest.wav", audio_path)
+        local_path = self.storage_manager.download_file("voice/latest.wav", audio_path)
         time.sleep(1)
-        voice_recognation.load_file(audio_path, lang)
+        self.voice_recognation.load_file(audio_path, lang)
         transcription, language, confidence = voice_recognation.process_audio()
         answer = research_bot.answer_question(question, transcription)
         print(f"Q: {question}\nA: {answer}\n")
@@ -211,9 +211,9 @@ class CaseCommand:
 
     def ask_bot (self , question):
         print("=" * 40, "\nCase Command: ask_bot")
-        answer = bot.start_chat(question)
+        answer = self.bot.start_chat(question)
         print(f"Q: {question}\nA: {answer}\n")
-        speaker.process(f"you asked {question} and answer is {answer}  {answer} " , lang)
+        self.speaker.process(f"you asked {question} and answer is {answer}  {answer} " , lang)
 
     def ask_time (self):
         print("=" * 40, "\nCase Command: ask_time")
