@@ -19,7 +19,7 @@ class CaseCommand:
     def image_caption (self):
 
           print("=" * 40, "\nCase Command: image_caption")
-          speaker.process("image caption Look at the spot to describe ", lang)
+          self.speaker.process("image caption Look at the spot to describe ", lang)
           db.child("/wearable_device").update({"take_new_Photo" : True})
           db.child("/wearable_device/z-sensors").update({"new_image_uploaded" : False})
           while True :
