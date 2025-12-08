@@ -16,23 +16,23 @@ class CaseCommand:
         self.gesture_recognition = gesture_recognition
         self.face_recognition = face_recognition
 
-    def image_caption (self):
+    def image_caption (self , lang):
 
           print("=" * 40, "\nCase Command: image_caption")
           self.speaker.process("image caption Look at the spot to describe ", lang)
-          db.child("/wearable_device").update({"take_new_Photo" : True})
-          db.child("/wearable_device/z-sensors").update({"new_image_uploaded" : False})
+          self.db.child("/wearable_device").update({"take_new_Photo" : True})
+          self.db.child("/wearable_device/z-sensors").update({"new_image_uploaded" : False})
           while True :
-            if not db.child("google_colab/run").get().val():
+            if not self.db.child("google_colab/run").get().val():
               break
-            if db.child("/wearable_device/z-sensors/new_image_uploaded").get().val() == True :
-              db.child("/wearable_device").update({"take_new_Photo" : False})
+            if self.db.child("/wearable_device/z-sensors/new_image_uploaded").get().val() == True :
+              self.db.child("/wearable_device").update({"take_new_Photo" : False})
               break
           image_path = "/content/latest.jpg"
-          local_path =  storage_manager.download_file("images/latest.jpg", image_path)
-          caption = image_caption_generator.predict_caption(local_path)
+          local_path =  self.storage_manager.download_file("images/latest.jpg", image_path)
+          caption = self.image_caption_generator.predict_caption(local_path)
           print(f"it looks like : {caption}")
-          speaker.process(f"It looks like {caption}" , lang)
+          self.speaker.process(f"It looks like {caption}" , lang)
 
 
     def get_finger_tip (self):
@@ -232,9 +232,9 @@ class CaseCommand:
 
 
 
-    def command(self, Command , question ):
+    def command(self, Command , question , lang ):
         if Command == "image_caption":
-          self.image_caption()
+          self.image_caption(lang)
 
         elif Command == "get_finger_tip":
           self.get_finger_tip()
