@@ -243,10 +243,10 @@ class CaseCommand:
           self.start_record()
 
         elif Command == "get_face":
-          self.get_face()
+          self.get_face(lang)
 
         elif Command == "get_facenum":
-          self.get_facenum(lang )
+          self.get_facenum()
 
         elif Command == "add_memory":
           self.add_memory()
