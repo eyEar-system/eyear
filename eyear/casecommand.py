@@ -131,7 +131,7 @@ class CaseCommand:
         self.db.child("wearable_device/z-sensors").update({"audio_recorded": False})
 
 
-    def add_face(self):
+    def add_face(self , lang):
         print("=" * 40, "\nCase Command: add_face")
         image_path = "/content/latest.jpg"
         self.speaker.process("say the name of the person after bib", lang)
