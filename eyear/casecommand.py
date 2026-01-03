@@ -62,7 +62,7 @@ class CaseCommand:
         self.speaker.process("Recording started. Please speak after the beep", lang)
         db.child("/wearable_device").update({"record": True})
 
-    def get_face(self):
+    def get_face(self , lang):
         print("=" * 40, "\nCase Command: get_face")
         image_path = "/content/latest.jpg"
         results = self.face_recognition.usage(image_path)[0]
@@ -246,7 +246,7 @@ class CaseCommand:
           self.get_face()
 
         elif Command == "get_facenum":
-          self.get_facenum()
+          self.get_facenum(lang )
 
         elif Command == "add_memory":
           self.add_memory()
