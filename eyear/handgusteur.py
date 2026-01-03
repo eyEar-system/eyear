@@ -1,5 +1,5 @@
 import cv2
-from mediapipe.python.solutions import hands as mp_hands
+import mediapipe as mp
 import math
 import gc
 
