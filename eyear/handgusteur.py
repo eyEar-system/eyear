@@ -6,23 +6,17 @@ import gc
 class HandGusteur:
     def __init__(self):
         # Initialize Mediapipe Hands
-        self.hands = mp_hands.Hands()
-        self.mp_hands_module = mp_hands  # For HandLandmark references
+        self.hands = mp.hands.Hands()
+        self.mp_hands_module = mp.hands  # For HandLandmark references
 
     def process_image(self, image_path):
-        """Process the image and detect gestures."""
-        # Load image
         image = cv2.imread(image_path)
         if image is None:
             raise FileNotFoundError(f"Image not found: {image_path}")
 
-        # Convert BGR to RGB
         rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-
-        # Process hands
         results = self.hands.process(rgb_image)
 
-        # Prepare data
         data = {
             "hands_in_frame": 0,
             "landmarks": [],
@@ -37,7 +31,6 @@ class HandGusteur:
                 data["bounding_boxes"].append(self.calculate_bounding_box(landmarks.landmark))
                 data["gestures"].append(self.detect_gesture(landmarks.landmark, image.shape[1], image.shape[0]))
 
-        # Cleanup
         self.release_resources(image, rgb_image, results)
         return data
 
@@ -54,7 +47,6 @@ class HandGusteur:
         return bbox[0] > 0 and bbox[1] > 0 and bbox[2] < frame_width and bbox[3] < frame_height
 
     def detect_gesture(self, landmarks, frame_width, frame_height):
-        # Landmarks references
         H = self.mp_hands_module.HandLandmark
         thumb_tip = landmarks[H.THUMB_TIP]
         index_tip = landmarks[H.INDEX_FINGER_TIP]
@@ -120,7 +112,6 @@ class HandGusteur:
             "fist": "get_face"
         }
         return mapping.get(gusteur, None)
-
 
 # Example usage
 if __name__ == "__main__":
