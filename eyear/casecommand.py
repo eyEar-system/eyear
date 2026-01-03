@@ -22,12 +22,12 @@ class CaseCommand:
           self.speaker.process("image caption Look at the spot to describe ", lang)
           self.db.child("/wearable_device").update({"take_new_Photo" : True})
           self.db.child("/wearable_device/z-sensors").update({"new_image_uploaded" : False})
-          while True :
-            if not self.db.child("google_colab/run").get().val():
-              break
-            if self.db.child("/wearable_device/z-sensors/new_image_uploaded").get().val() == True :
-              self.db.child("/wearable_device").update({"take_new_Photo" : False})
-              break
+          #while True :
+          #  if not self.db.child("google_colab/run").get().val():
+           #   break
+          #  if self.db.child("/wearable_device/z-sensors/new_image_uploaded").get().val() == True :
+            #  self.db.child("/wearable_device").update({"take_new_Photo" : False})
+            #  break
           image_path = "/content/latest.jpg"
           local_path =  self.storage_manager.download_file("images/latest.jpg", image_path)
           caption = self.image_caption_generator.predict_caption(local_path)
