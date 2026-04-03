@@ -1,66 +1,127 @@
-# 🧠 دراسة مقارنة لاختيار نموذج LLM مفتوح المصدر لتطبيق دردشة على Google Colab (CPU)
 
-### by : Ah777ed_said
-**السياق**: بحث عن نموذج شبيه ChatGPT لكن مفتوح المصدر ويقدر يشتغل على Google Colab CPU
+````md
+# 🧠 Comparative Study for Selecting an Open-Source LLM for a Chat Application on Google Colab (CPU)
 
-## use llama 1 B
-```python 
-from eyear import Bot 
+### by: Ah777ed_said  
+**Context**: Searching for a ChatGPT-like open-source model that can run on Google Colab using CPU only
 
-bot = Bot()
-output = bot.start_chat("hello")
-````
 ---
-
-## أولًا: أفضل 4 موديلات Open Source من نوع ChatGPT (LLMs)
-
-### في فئات مختلفة:
-
-| الفئة                 | الموديل                        | نبذة                                |
-|-----------------------|-------------------------------|-------------------------------------|
-| الذكاء العالي         | Mistral 7B Instruct           | قوي في المحادثات والمنطق           |
-| الخفة والكفاءة        | Phi-2                         | الذكاء والسرعة مع حجم صغير          |
-| الحجم الأقل           | TinyLLaMA 1.1B                | لا يحتاج RAM عالي                   |
-| النموذج العام         | GPT-2                         | نموذج متعدد الاستخدامات            |
+قثسعمف 
+## 🚀 Use LLaMA 1B
 
 ---
 
-## السؤال: هل نقصد meta-llama/Llama-3.2-1B-Instruct؟
+## 🧩 Top 4 Open-Source ChatGPT-like Models (LLMs)
 
-الإجابة: نعم. هذا هو النموذج الذي يمكن تشغيله في بيئات CPU مثل Google Colab.
+### Across different categories:
 
----
+| Category           | Model               | Description                           |
+| ------------------ | ------------------- | ------------------------------------- |
+| High Intelligence  | Mistral 7B Instruct | Strong in conversations and reasoning |
+| Efficiency & Speed | Phi-2               | High intelligence with small size     |
+| Smallest Size      | TinyLLaMA 1.1B      | Requires very low RAM                 |
+| General Purpose    | GPT-2               | Multi-purpose model                   |
 
-## أنا باستخدم Google Colab (CPU Mode)
 
-وعلى الأساس ده احتاجنا نموذج:
-- صغير حجمًا
-- متوافق مع transformers
-- مينفع عليه LoRA لحقن النماذج لحقًا
 
----
+## 💻 Environment: Google Colab (CPU Mode)
 
-## المقارنة النهائية:
+Based on this setup, we needed a model that is:
 
-| النموذج                  | الحجم   | الذكاء العام  | الموارد | السرعة  | اللغة العربية  | نقاط قوة                       | نقاط ضعف                        |
-|--------------------------|---------|---------------|---------|---------|----------------|---------------------------------|---------------------------------|
-| LLaMA-3.2-1B-Instruct    | 1B      | جيد جدًا      | خفيف    | متوسط  | مقبول          | حديث – موجه Instruct           | قليل التوسيق                   |
-| Phi-2                    | 1.7B    | ممتاز في المنطق | خفيف جدًا | سريع  | ضعيف           | ذكاء عالي                      | لا يفهم عربي                    |
-| TinyLLaMA-1.1B           | 1.1B    | متوسط         | أخفهم   | سريع جدًا | ضعيف جدًا     | ممتاز للتعلم                    | استجابات سطحية                 |
-| GPT-2                    | 1.5B    | جيد جدًا      | متوسط   | متوسط  | جيد            | متعدد الاستخدامات              | لا يواكب بعض الأنماط الحديثة  |
+* Small in size
+* Compatible with Hugging Face Transformers
+* Supports LoRA for future fine-tuning
 
 ---
 
-## نتيجة الاختيار:
+## 📊 Final Comparison
 
-**meta-llama/Llama-3.2-1B-Instruct** هو الموديل المختار للأسباب التالية:
-
-1. مناسب لـ CPU
-2. مبني على LLaMA 3.2 الحديث
-3. مدرب على نمط Instruct
-4. يقدم استجابات ذكية وموجهة
+| Model                 | Size | General Intelligence | Resources  | Speed     | Arabic Support | Strengths                  | Weaknesses                |
+| --------------------- | ---- | -------------------- | ---------- | --------- | -------------- | -------------------------- | ------------------------- |
+| LLaMA-3.2-1B-Instruct | 1B   | Very Good            | Light      | Medium    | Acceptable     | Modern – Instruction-tuned | Limited documentation     |
+| Phi-2                 | 1.7B | Excellent reasoning  | Very Light | Fast      | Weak           | High intelligence          | Poor Arabic understanding |
+| TinyLLaMA-1.1B        | 1.1B | Medium               | Very Light | Very Fast | Very Weak      | Great for learning         | Shallow responses         |
+| GPT-2                 | 1.5B | Very Good            | Medium     | Medium    | Good           | Versatile                  | Outdated in modern tasks  |
 
 ---
+
+## ✅ Final Decision
+
+**meta-llama/Llama-3.2-1B-Instruct** was selected for the following reasons:
+
+1. Suitable for CPU environments
+2. Based on the modern LLaMA 3.2 architecture
+3. Instruction-tuned (better responses)
+4. Produces smarter and more structured outputs
+
+---
+
+## 🧪 First Experiment
+
+```python
+from transformers import AutoTokenizer, AutoModelForCausalLM
+import torch
+
+class ChatBot:
+    def __init__(self, model_name="meta-llama/Llama-3.2-1B-Instruct", token="YOUR_TOKEN"):
+        self.token = token
+        self.model_name = model_name
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name, use_auth_token=self.token)
+        self.model = AutoModelForCausalLM.from_pretrained(self.model_name, use_auth_token=self.token).to(self.device)
+
+    def generate_response(self, user_message, max_length=30, temperature=0.1, top_p=0.9):
+        inputs = self.tokenizer.encode(user_message, return_tensors='pt').to(self.device)
+
+        with torch.no_grad():
+            outputs = self.model.generate(
+                inputs,
+                max_length=max_length,
+                num_return_sequences=1,
+                pad_token_id=self.tokenizer.eos_token_id,
+                temperature=temperature,
+                top_p=top_p
+            )
+
+        return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+    def start_chat(self, message):
+        if message.lower() in ["exit", "quit"]:
+            print("AI Assistant: Goodbye!")
+            return False
+
+        response = self.generate_response(message)
+        print(f"You: {message}")
+        print(f"AI Assistant: {response}")
+        return response
+```
+
+---
+
+## 📌 Observations
+
+### GPT-2:
+
+* Repetitive responses
+* Sometimes irrelevant
+* Weak conversational flow
+
+### LLaMA 1B:
+
+* More natural responses
+* Better structure
+* Handles prompts more intelligently
+* Still has some hallucinations
+
+---
+
+## 🎯 Conclusion
+
+For a **lightweight AI chatbot running on CPU**,
+**LLaMA-3.2-1B-Instruct** is one of the best open-source choices currently available.
+
+
 
 ## التجربة الأولى
 
